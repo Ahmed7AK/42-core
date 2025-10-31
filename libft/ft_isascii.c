@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 07:42:08 by akheiral          #+#    #+#             */
-/*   Updated: 2025/10/29 07:42:13 by akheiral         ###   ########.fr       */
+/*   Created: 2025/10/29 07:45:42 by akheiral          #+#    #+#             */
+/*   Updated: 2025/10/29 07:45:44 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalnum(int c)
+int	ft_isascii(int c)
 {
-	unsigned char	ch;
-	
+	unsigned char ch;
+
 	ch = c;
-	if ((ch >= '0' && ch <= '9') || (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))
-	{
-		return (1);	
-	}
-	return (0);
+	if (ch >= 0 && ch <= 127)
+		return (1);
+	return(0);
 }
