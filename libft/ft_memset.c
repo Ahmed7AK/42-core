@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 16:59:42 by akheiral          #+#    #+#             */
-/*   Updated: 2025/10/28 16:28:22 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/01 14:53:06 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	*ft_memset(void *b, int c, size_t len)
 {
+	if (!b)
+		return (0);
+
 	unsigned char	*ptr;
 	unsigned char	ch;
 	size_t		i;
@@ -26,6 +29,6 @@ void	*ft_memset(void *b, int c, size_t len)
 		ptr[i] = ch;
 		i++;
 	}
-	return(b);
+	return (b);
 }
 

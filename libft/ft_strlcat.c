@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/01 19:34:45 by akheiral          #+#    #+#             */
+/*   Updated: 2025/11/01 19:34:47 by akheiral         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stddef.h>
-#include <stdio.h>
-#include <string.h>
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
+	if (!dst || !src)
+		return (0);
+
 	size_t	i;
 	size_t	j;
 
@@ -20,14 +33,4 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	}
 	dst[i] = '\0';
 	return (i + 1);
-}
-
-int main(void)
-{
-	char *src = "ahmed";
-	char dst[7];
-	dst[0] = 'h';
-	dst[1] = 'i';
-	int result = (int)ft_strlcat(dst, src, 5);
-	printf("%s\n%i\n", dst, result);
 }

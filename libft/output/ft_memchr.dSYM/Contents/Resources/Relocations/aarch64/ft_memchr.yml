@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/ahmed/code/42/core/libft/output/ft_memchr'
+relocations:     []
+...
