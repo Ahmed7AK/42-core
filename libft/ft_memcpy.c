@@ -6,11 +6,11 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 19:18:28 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/01 19:19:29 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:52:21 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {

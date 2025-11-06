@@ -6,10 +6,11 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 08:37:50 by akheiral          #+#    #+#             */
-/*   Updated: 2025/10/29 08:37:53 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:51:38 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
 int	ft_isprint(int c)
 {

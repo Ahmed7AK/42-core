@@ -6,16 +6,18 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 19:48:37 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/01 19:48:39 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/04 15:31:46 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_tolower(int c)
 {
 	unsigned char	ch;
 
 	ch = c;
-	if (ch >= 'A' || ch <= 'Z')
+	if (ch >= 'A' && ch <= 'Z')
 		return (ch + 32);
 	return (ch);
 }

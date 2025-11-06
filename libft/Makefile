@@ -1,9 +1,14 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-TARGET = $@
+TARGET = libft.a
+DEPENDENCIES = ft_*.o
 
-%: %.c
-	$(CC) $(CFLAGS) $< -o $@
+
+$(TARGET):  $(DEPENDENCIES)
+	ar rcs $(TARGET) $(DEPENDENCIES)
+
+$(DEPENDENCIES): ft_*.c
+	$(CC) $(CFLAGS) -c ft_*.c
 
 clean:
-	rm -f *.o $@
+	rm -f *.o 

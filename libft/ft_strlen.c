@@ -6,11 +6,11 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 19:50:49 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/01 14:52:01 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:53:02 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 size_t	ft_strlen(const char *s)
 {

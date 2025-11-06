@@ -6,12 +6,11 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 12:26:31 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/03 12:34:56 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:52:45 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 char    *ft_strdup(const char *s1)
 {

@@ -6,17 +6,18 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 18:51:51 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/03 08:50:52 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:51:21 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
 int	ft_isalpha(int c)
 {
 	unsigned char	ch;
 
 	ch = c;
-	if (ch >= 'A' && ch <= 'Z' || ch >= 'a' && ch <= 'z')
+	if (((ch >= 'A') && (ch <= 'Z')) || ((ch >= 'a') && (ch <= 'z')))
 	{
 		return (1);
 	}

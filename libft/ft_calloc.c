@@ -6,12 +6,11 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 11:58:43 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/03 12:28:47 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:51:09 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdlib.h>
+#include "libft.h"
 
 void    *ft_calloc(size_t count, size_t size)
 {

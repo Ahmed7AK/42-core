@@ -6,9 +6,11 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 10:20:43 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/03 11:26:30 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/05 11:41:17 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int ft_atoi(const char *str)
 {
@@ -21,14 +23,16 @@ int ft_atoi(const char *str)
 
     sign = 1;
     i = 0;
+    while (str[i] == ' ')
+        i++;
     if (str[i] == '-')
     {
-        sign *= -1;
+        sign = -1;
         i++;
     }
     else if (str[i] == '+')
     {
-        sign *= 1;
+        sign = 1;
         i++;
     }
     
@@ -41,3 +45,4 @@ int ft_atoi(const char *str)
     
     return (sign * sum);
 } 
+

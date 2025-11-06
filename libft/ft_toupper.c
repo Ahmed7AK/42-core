@@ -6,16 +6,18 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 19:46:32 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/01 19:46:35 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/04 15:31:56 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_toupper(int c)
 {
 	unsigned char	ch;
 	
 	ch = c;
-	if (ch >= 'a' || ch <= 'z')
+	if (ch >= 'a' && ch <= 'z')
 		return (ch - 32);
 	return (ch);
 }
