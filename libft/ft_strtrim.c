@@ -6,13 +6,13 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 10:37:07 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/06 14:53:00 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/07 20:06:09 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int in_str(char const *str, char ch)
+static  int in_str(char const *str, char ch)
 {
     int i;
     
@@ -26,7 +26,7 @@ int in_str(char const *str, char ch)
     return (0);
 }
 
-int find_len(char const *str, char const *filter)
+static  int find_len(char const *str, char const *filter)
 {
     int len;
     int i;

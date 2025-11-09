@@ -6,13 +6,13 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:54:38 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/06 15:07:28 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/07 20:05:19 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int count_words(char const *str, char c)
+static int count_words(char const *str, char c)
 {
     int len;
 
@@ -23,29 +23,37 @@ int count_words(char const *str, char c)
             len++;
         str++;
     }
-    return (len);
+    return (len + 1);
 }
+
 
 char    **ft_split(char const *s, char c)
 {
-    int word_count;
+    int words;
     char **strs;
     int i;
+    int start;
     int j;
-
-    word_count = count_words(s, c);
-    strs = malloc((word_count + 1) * sizeof(char *));
-
+    
+    words = count_words(s, c);
+    strs = malloc((words + 1) * sizeof(char *));
+    if (!strs && !s)
+        return (NULL);
+    
     i = 0;
+    start = 0;
     j = 0;
     while (s[i])
     {
-        while (s[i] != c)
-        {
-            strs[j] = s[i];
-            j++;
-        }
-        i++;
+        while (s[i] && s[i] == c)
+            i++;
+        start = i;
+        while (s[i] && s[i] != c)
+            i++;
+        if (i > start)
+            strs[j++] = ft_substr(s, start, i - start);
     }
-    
+    strs[j] = NULL;
+
+    return (strs);
 }
