@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 13:41:31 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/09 20:16:00 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/10 08:37:50 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct  s_list
 {
     void    *content;
     struct s_list   *next;
-}   t_lise;
+}   t_list;
 
 int ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);

@@ -1,14 +1,23 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-TARGET = libft.a
-DEPENDENCIES = ft_*.o
+NAME = libft.a
+SRCS = ft_*.c
+OBJS = $(SRCS:.c=.o)
 
 
-$(TARGET):  $(DEPENDENCIES)
-	ar rcs $(TARGET) $(DEPENDENCIES)
+all:	$(NAME)
 
-$(DEPENDENCIES): ft_*.c
-	$(CC) $(CFLAGS) -c ft_*.c
+$(NAME): $(OBJS) 
+	ar rcs $(NAME) $(OBJS)
+
+$(OBJS): $(SRCS)
+	$(CC) $(CFLAGS) -c $(SRCS)
 
 clean:
-	rm -f *.o 
+	rm -f $(OBJS)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean
+	make all
