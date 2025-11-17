@@ -1,3 +1,3 @@
 source ~/norm_venv/bin/activate
-norminette
+norminette $1
 deactivate

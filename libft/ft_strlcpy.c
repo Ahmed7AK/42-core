@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 19:31:28 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/03 13:52:57 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/12 15:02:55 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,20 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
+	size_t	srcsize;
+
 	if (!dst || !src)
 		return (0);
-	
-	size_t	srcsize;
-	size_t	i;
-	
-	srcsize = 0;
-	while (src[srcsize] != '\0')
+	srcsize = ft_strlen(src);
+	if (dstsize >= srcsize + 1)
 	{
-		srcsize++;
+		ft_memcpy(dst, src, srcsize);
+		dst[srcsize] = '\0';
 	}
-	
-	i = 0;
-	while (i < dstsize - 1 && src[i] != '\0')
+	else if (dstsize > 0)
 	{
-		dst[i] = src[i];
-		i++;
+		ft_memcpy(dst, src, dstsize - 1);
+		dst[dstsize - 1] = '\0';
 	}
-	dst[i] = '\0';
 	return (srcsize);
 }
-

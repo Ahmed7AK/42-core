@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/09 11:40:54 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/09 11:53:23 by akheiral         ###   ########.fr       */
+/*   Created: 2025/11/09 15:31:15 by akheiral          #+#    #+#             */
+/*   Updated: 2025/11/16 14:26:08 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list  *ft_lstnew(void *content)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-    t_list  *node;
+	t_list	*next;
 
-    node = malloc(sizeof(t_list));
-    if (!node)
-        return (NULL);
-
-    node->content = content;
-    node->next = NULL;
-
-    return(node);
+	if (!lst || !del)
+		return ;
+	while (*lst)
+	{
+		next = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = next;
+	}
 }
