@@ -5,19 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/03 11:58:43 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/13 14:36:40 by akheiral         ###   ########.fr       */
+/*   Created: 2025/11/19 14:00:02 by akheiral          #+#    #+#             */
+/*   Updated: 2025/11/19 14:00:05 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdint.h>
 
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*mem;
 	size_t	total;
 
-	if (size != 0 && count > (size_t)(-1) / size)
+	if (size != 0 && count > SIZE_MAX / size)
 		return (NULL);
 	total = count * size;
 	mem = malloc(total);

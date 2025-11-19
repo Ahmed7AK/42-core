@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 19:31:28 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/12 15:02:55 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/19 09:41:28 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	srcsize;
 
-	if (!dst || !src)
-		return (0);
 	srcsize = ft_strlen(src);
 	if (dstsize >= srcsize + 1)
 	{

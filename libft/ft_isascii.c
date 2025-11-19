@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 07:45:42 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/03 13:51:27 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/10 13:55:03 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 int	ft_isascii(int c)
 {
-	unsigned char ch;
-
-	ch = c;
-	if (ch >= 0 && ch <= 127)
+	if (c >= 0 && c <= 127)
 		return (1);
-	return(0);
+	return (0);
 }

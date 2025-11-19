@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 19:50:49 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/03 13:53:02 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/19 09:19:40 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	len;
 
-	if (!s)
-		return (0);
-
 	len = 0;
-	while (*s++)
+	while (s[len])
 		len++;
 	return (len);
 }

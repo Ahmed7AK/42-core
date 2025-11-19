@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 08:37:50 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/03 13:51:38 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/10 13:57:00 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 int	ft_isprint(int c)
 {
-	unsigned char	ch;
-	
-	ch = c;
-	if (ch >= 32 && ch <= 126)
-	{
+	if (c >= 32 && c <= 126)
 		return (1);
-	}
 	return (0);
 }

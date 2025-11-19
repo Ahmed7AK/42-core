@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 19:34:45 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/13 09:43:08 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/19 09:44:45 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,18 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	dstlen;
 	size_t	srclen;
+	size_t	copylen;
 
-	if (!dst || !src)
-		return (0);
-	dstlen = ft_strlen(dst);
+	dstlen = 0;
+	while (dst[dstlen] != '\0' && dstlen < dstsize)
+		dstlen++;
 	srclen = ft_strlen(src);
-	if (dstsize <= dstlen)
-		return (srclen + dstlen);
-	ft_strlcpy(&dst[dstlen], src, dstsize - dstlen);
-	return (srclen + dstlen);
+	if (dstlen == dstsize)
+		return (dstsize + srclen);
+	copylen = dstsize - dstlen - 1;
+	if (srclen < copylen)
+		copylen = srclen;
+	ft_memcpy(dst + dstlen, src, copylen);
+	dst[dstlen + copylen] = '\0';
+	return (dstlen + srclen);
 }

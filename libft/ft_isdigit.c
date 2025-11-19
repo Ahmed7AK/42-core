@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 18:52:07 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/03 13:51:32 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/19 09:16:10 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 int	ft_isdigit(int c)
 {
-	unsigned char	ch;
-
-	ch = c;
-	if (ch >= '0' && ch <= '9')
+	if (c >= '0' && c <= '9')
 	{
 		return (1);
 	}
