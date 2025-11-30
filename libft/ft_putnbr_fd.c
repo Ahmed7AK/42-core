@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 17:42:34 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/15 15:37:54 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:23:10 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,22 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	char	*num;
-	int		i;
+	char	ch;
 
-	num = ft_itoa(n);
-	if (!num)
-		return ;
-	i = 0;
-	while (num[i])
+	if (n == -2147483648)
 	{
-		write(fd, &num[i], 1);
-		i++;
+		write(fd, "-2147483648", 11);
+		return ;
 	}
-	free(num);
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		n = -n;
+	}
+	if (n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+	}
+	ch = (n % 10) + '0';
+	write(fd, &ch, 1);
 }

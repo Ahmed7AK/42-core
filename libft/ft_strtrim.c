@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 10:37:07 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/13 16:43:30 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:40:22 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,46 +26,22 @@ static int	in_str(char const *str, char ch)
 	return (0);
 }
 
-static int	find_len(char const *str, char const *filter)
-{
-	int	len;
-	int	i;
-
-	len = 0;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (!in_str(filter, str[i]))
-			len++;
-		i++;
-	}
-	return (len);
-}
-
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*trim;
-	int		len;
-	int		i;
-	int		j;
+	int		start;
+	int		end;
 
 	if (!s1 || !set)
 		return (NULL);
-	len = find_len(s1, set);
-	trim = malloc(len + 1);
+	start = 0;
+	end = ft_strlen(s1);
+	while (s1[start] && in_str(set, s1[start]))
+		start++;
+	while (end > start && in_str(set, s1[end - 1]))
+		end--;
+	trim = ft_substr(s1, start, end - start);
 	if (!trim)
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i] != '\0')
-	{
-		if (!in_str(set, s1[i]))
-		{
-			trim[j] = s1[i];
-			j++;
-		}
-		i++;
-	}
-	trim[j] = '\0';
 	return (trim);
 }

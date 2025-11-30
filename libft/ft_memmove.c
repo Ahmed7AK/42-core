@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 15:14:58 by akheiral          #+#    #+#             */
-/*   Updated: 2025/11/19 09:39:51 by akheiral         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:30:55 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	unsigned char	*src_ptr;
 	size_t			i;
 
+	if (!dst && !src)
+		return (dst);
 	dst_ptr = (unsigned char *)dst;
 	src_ptr = (unsigned char *)src;
 	i = 0;
