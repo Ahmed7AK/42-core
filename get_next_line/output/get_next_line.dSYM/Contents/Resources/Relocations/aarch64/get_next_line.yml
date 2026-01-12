@@ -1,5 +1,0 @@
----
-triple:          'arm64-apple-darwin'
-binary-path:     '/Users/ahmed/code/42/core/get_next_line/output/get_next_line'
-relocations:     []
-...
