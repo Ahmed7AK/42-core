@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 12:02:59 by akheiral          #+#    #+#             */
-/*   Updated: 2026/01/17 12:29:37 by akheiral         ###   ########.fr       */
+/*   Updated: 2026/01/17 12:38:35 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <fcntl.h>
 #include <stdio.h>
 
@@ -97,19 +97,19 @@ char	*read_line(int fd, char *leftover)
 
 char	*get_next_line(int fd)
 {
-	static char	*leftover = NULL;
+	static char	*leftover[MAX_FD];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	leftover = read_line(fd, leftover);
-	if (!leftover || *leftover == '\0')
+	leftover[fd] = read_line(fd, leftover[fd]);
+	if (!leftover[fd] || *leftover[fd] == '\0')
 	{
-		free(leftover);
-		leftover = NULL;
+		free(leftover[fd]);
+		leftover[fd] = NULL;
 		return (NULL);
 	}
-	line = extract_line(leftover);
-	leftover = extract_leftover(leftover);
+	line = extract_line(leftover[fd]);
+	leftover[fd] = extract_leftover(leftover[fd]);
 	return (line);
 }
