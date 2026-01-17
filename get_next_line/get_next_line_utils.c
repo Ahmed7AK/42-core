@@ -6,15 +6,15 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 12:03:08 by akheiral          #+#    #+#             */
-/*   Updated: 2026/01/17 10:50:54 by akheiral         ###   ########.fr       */
+/*   Updated: 2026/01/17 11:33:40 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *str)
+size_t	ft_strlen(char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])
@@ -58,10 +58,10 @@ char	*ft_strjoin(char *str1, char *str2)
 	return (result);
 }
 
-char	*ft_substr(char *str, int start, int len)
+char	*ft_substr(char *str, size_t start, size_t len)
 {
 	char	*substr;
-	int		i;
+	size_t	i;
 
 	if (!str)
 		return (NULL);

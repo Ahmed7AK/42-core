@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 12:02:59 by akheiral          #+#    #+#             */
-/*   Updated: 2026/01/17 11:04:17 by akheiral         ###   ########.fr       */
+/*   Updated: 2026/01/17 11:34:30 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	is_line(char *str)
 
 char	*read_line(int fd, char *leftover)
 {
-	int		nchars;
+	ssize_t	nchars;
 	char	*tmp;
 	char	*buffer;
 
@@ -113,12 +113,3 @@ char	*get_next_line(int fd)
 	leftover = extract_leftover(leftover);
 	return (line);
 }
-
-// int main(void)
-// {
-// 	int fd = open("test.txt", O_RDONLY);
-// 	char *str = get_next_line(fd);
-// 	printf("%s", str);
-// 	char *str2 = get_next_line(fd);
-// 	printf("%s", str2);
-// }
