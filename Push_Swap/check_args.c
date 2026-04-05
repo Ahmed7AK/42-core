@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 02:16:25 by akheiral          #+#    #+#             */
-/*   Updated: 2026/04/04 06:58:56 by akheiral         ###   ########.fr       */
+/*   Updated: 2026/04/05 12:30:38 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,9 @@ int	ft_check_args(int argc, char *argv[])
 
 	if (argc < 2)
 		return (0);
-	else if (argc == 2)
-	{
+	i = 0;
+	if (argc == 2)
 		args = ft_split(argv[1], ' ');
-		i = 0;
-	}
 	else
 		args = &argv[1];
 	if (ft_check_dup(argc, args))

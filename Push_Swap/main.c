@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 14:22:14 by akheiral          #+#    #+#             */
-/*   Updated: 2026/04/05 11:34:48 by akheiral         ###   ########.fr       */
+/*   Updated: 2026/04/05 12:33:48 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_cleanup(t_list **stack_a, t_list **stack_b, char **args, int argc)
 	free(stack_a);
 	free(stack_b);
 	if (argc == 2)
-		ft_free_split(args, count_words(args[1], ' '));
+		ft_free_split(args, count_words(args[0], ' '));
 }
 
 void	ft_init_stacks(t_list ***stack_a, t_list ***stack_b)
@@ -47,7 +47,6 @@ int	main(int argc, char *argv[])
 		args = ft_split(argv[1], ' ');
 	else
 		args = &argv[1];
-
 	ft_init_stacks(&stack_a, &stack_b);
 	ft_fill_stack(stack_a, args);
 	ft_normalize_index(stack_a);

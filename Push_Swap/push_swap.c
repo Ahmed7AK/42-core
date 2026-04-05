@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 14:52:06 by akheiral          #+#    #+#             */
-/*   Updated: 2026/04/05 07:02:00 by akheiral         ###   ########.fr       */
+/*   Updated: 2026/04/05 12:45:41 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,19 @@ void	ft_simple_sort(t_list **stack)
 		ft_ra(stack);
 }
 
+static int	radix_bits(int len_a)
+{
+	int	bits;
+
+	bits = 0;
+	while (len_a > 0)
+	{
+		bits++;
+		len_a /= 2;
+	}
+	return (bits);
+}
+
 void	radix_sort(t_list **stack_a, t_list **stack_b, int len_a)
 {
 	int	i;
@@ -58,13 +71,7 @@ void	radix_sort(t_list **stack_a, t_list **stack_b, int len_a)
 	int	bits_needed;
 	int	bit;
 
-	size = len_a;
-	bits_needed = 0;
-	while (size > 0)
-	{
-		bits_needed++;
-		size /= 2;
-	}
+	bits_needed = radix_bits(len_a);
 	bit = 0;
 	while (bit < bits_needed)
 	{
@@ -78,11 +85,8 @@ void	radix_sort(t_list **stack_a, t_list **stack_b, int len_a)
 			i++;
 		}
 		size = ft_stack_len(stack_b);
-		while (size > 0)
-		{
+		while (size-- > 0)
 			ft_pa(stack_a, stack_b);
-			size--;
-		}
 		bit++;
 	}
 }
