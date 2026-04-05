@@ -68,11 +68,10 @@ rand_unique() {
 # ---------------------------------------------------------------------------
 check_leaks() {
     local arg="$1"
-    MallocStackLogging=1 ./push_swap $arg > /dev/null 2>&1 &
-    local pid=$!
-    wait $pid
-    leaks $pid > /tmp/leaks_out 2>&1
-    if grep -q "0 leaks" /tmp/leaks_out; then
+    local output
+
+    output=$(MallocStackLogging=1 leaks --atExit -- ./push_swap $arg 2>&1)
+    if echo "$output" | grep -q "0 leaks for 0 total leaked bytes"; then
         return 0
     else
         return 1
