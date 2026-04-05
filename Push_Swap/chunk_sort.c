@@ -6,21 +6,19 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 13:31:57 by akheiral          #+#    #+#             */
-/*   Updated: 2026/04/05 11:21:26 by akheiral         ###   ########.fr       */
+/*   Updated: 2026/04/05 15:53:07 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_biggest_pos(t_list **stack)
+static int	ft_biggest_pos(t_list **stack)
 {
 	t_list	*tmp;
 	int		i;
 	int		biggest_value;
 	int		biggest_pos;
-	int		len;
 
-	len = ft_stack_len(stack);
 	i = 0;
 	biggest_value = -1;
 	biggest_pos = 0;
@@ -38,16 +36,14 @@ int	ft_biggest_pos(t_list **stack)
 	return (biggest_pos);
 }
 
-void	ft_chunk_push(t_list **stack_a, t_list **stack_b, int len_a)
+static void	ft_chunk_push(t_list **stack_a, t_list **stack_b, int len_a)
 {
 	int	chunk_num;
-	int	n;
 	int	i;
 
 	chunk_num = 40;
 	if (len_a <= 100)
 		chunk_num = 20;
-	n = 0;
 	i = 0;
 	while (*stack_a)
 	{
@@ -67,7 +63,7 @@ void	ft_chunk_push(t_list **stack_a, t_list **stack_b, int len_a)
 	}
 }
 
-void	ft_chunk_pull(t_list **stack_a, t_list **stack_b)
+static void	ft_chunk_pull(t_list **stack_a, t_list **stack_b)
 {
 	int	pos;
 	int	len_b;
@@ -90,7 +86,7 @@ void	ft_chunk_pull(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-int	ft_find_zero(t_list **stack)
+static int	ft_find_zero(t_list **stack)
 {
 	t_list	*tmp;
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 02:16:25 by akheiral          #+#    #+#             */
-/*   Updated: 2026/04/05 12:30:38 by akheiral         ###   ########.fr       */
+/*   Updated: 2026/04/05 15:53:40 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static long	ft_atol(char *num)
 	return (tmp);
 }
 
-static int	ft_check_dup(int argc, char **args)
+static int	ft_check_dup(char **args)
 {
 	int	i;
 	int	j;
@@ -112,7 +112,7 @@ int	ft_check_args(int argc, char *argv[])
 		args = ft_split(argv[1], ' ');
 	else
 		args = &argv[1];
-	if (ft_check_dup(argc, args))
+	if (ft_check_dup(args))
 		return (0);
 	while (args[i])
 	{
