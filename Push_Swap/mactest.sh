@@ -2,6 +2,7 @@
 
 # Configuration
 MAX_MOVES=5500
+MAX_MOVES_5=12
 CHECKER="./checker_mac"
 
 # Colors
@@ -20,7 +21,7 @@ echo "========================================================"
 echo "  PUSH_SWAP MULTI-SIZE TESTER (Apple Silicon)"
 echo "  Testing sizes: ${SIZES[*]}"
 echo "  Tests per size: 5 (500 for final 500-number test)"
-echo "  Max moves allowed: $MAX_MOVES"
+echo "  Max moves allowed: $MAX_MOVES (12 for 5 numbers)"
 echo "========================================================"
 
 # Check if checker exists
@@ -46,11 +47,11 @@ rand_unique() {
     local hi=$3
 
     LC_ALL=C tr -dc '0-9\n' < /dev/urandom 2>/dev/null \
-        | fold -w 8 \
+        | fold -w 8 2>/dev/null \
         | awk -v lo="$lo" -v hi="$hi" -v n="$count" '
-            BEGIN { srand() }
             {
-                val = (($1 + 0) % (hi - lo + 1)) + lo
+                range = hi - lo + 1
+                val = (($1 + 0) % range) + lo
                 if (!(val in seen)) {
                     seen[val] = 1
                     print val
@@ -61,15 +62,11 @@ rand_unique() {
 }
 
 # ---------------------------------------------------------------------------
-# Helper: check for leaks using macOS native leaks tool
-# The trick: run the process, grab its PID, attach leaks to it
-# MallocStackLogging=1 is required for leaks to work correctly
-# Returns 0 if no leaks, 1 if leaks found
+# Helper: check for leaks using macOS native leaks --atExit
 # ---------------------------------------------------------------------------
 check_leaks() {
     local arg="$1"
     local output
-
     output=$(MallocStackLogging=1 leaks --atExit -- ./push_swap $arg 2>&1)
     if echo "$output" | grep -q "0 leaks for 0 total leaked bytes"; then
         return 0
@@ -118,6 +115,64 @@ run_test() {
 # ---------------------------------------------------------------------------
 TOTAL_PASS=0
 TOTAL_FAIL=0
+
+# ---------------------------------------------------------------------------
+# EXHAUSTIVE 5-NUMBER TEST (all 120 permutations, max 12 moves each)
+# Uses values 1-5 which normalize to indexes 0-4
+# ---------------------------------------------------------------------------
+echo ""
+echo -e "${MAGENTA}========================================================"
+echo -e "  EXHAUSTIVE 5-NUMBER TEST (all 120 permutations)"
+echo -e "  Max moves allowed: $MAX_MOVES_5"
+echo -e "========================================================${RESET}"
+
+FIVE_PASS=0
+FIVE_FAIL=0
+FIVE_MAX=0
+FIVE_TOTAL=0
+
+# Generate all permutations of "1 2 3 4 5" using awk
+ALL_PERMS=$(awk 'BEGIN {
+    n = 5
+    for (i = 1; i <= n; i++) a[i] = i
+    do {
+        line = ""
+        for (i = 1; i <= n; i++) line = line a[i] (i < n ? " " : "")
+        print line
+        # next permutation
+        i = n - 1
+        while (i >= 1 && a[i] >= a[i+1]) i--
+        if (i < 1) break
+        j = n
+        while (a[j] <= a[i]) j--
+        tmp = a[i]; a[i] = a[j]; a[j] = tmp
+        left = i + 1; right = n
+        while (left < right) {
+            tmp = a[left]; a[left] = a[right]; a[right] = tmp
+            left++; right--
+        }
+    } while (1)
+}')
+
+while IFS= read -r PERM; do
+    CHECKER_OUT=$(./push_swap $PERM | $CHECKER $PERM 2>&1)
+    MOVES=$(./push_swap $PERM | wc -l | tr -d ' ')
+    FIVE_TOTAL=$((FIVE_TOTAL + MOVES))
+    [ "$MOVES" -gt "$FIVE_MAX" ] && FIVE_MAX=$MOVES
+
+    if [ "$CHECKER_OUT" != "OK" ] || [ "$MOVES" -gt "$MAX_MOVES_5" ]; then
+        FIVE_FAIL=$((FIVE_FAIL + 1))
+        [ "$CHECKER_OUT" != "OK" ] && REASON="not_sorted" || REASON="exceeded_moves($MOVES)"
+        echo -e "  ${RED}FAIL${RESET} [$PERM] → $MOVES moves ${YELLOW}↳ $REASON${RESET}"
+    else
+        FIVE_PASS=$((FIVE_PASS + 1))
+    fi
+done <<< "$ALL_PERMS"
+
+FIVE_AVG=$((FIVE_TOTAL / 120))
+TOTAL_PASS=$((TOTAL_PASS + FIVE_PASS))
+TOTAL_FAIL=$((TOTAL_FAIL + FIVE_FAIL))
+echo -e "  ${MAGENTA}5-number: ${GREEN}$FIVE_PASS/120 passed${RESET} / ${RED}$FIVE_FAIL failed${RESET} | max moves: $FIVE_MAX | avg moves: $FIVE_AVG"
 
 # ---------------------------------------------------------------------------
 # WORST CASE SCENARIOS

@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 14:52:06 by akheiral          #+#    #+#             */
-/*   Updated: 2026/04/05 12:45:41 by akheiral         ###   ########.fr       */
+/*   Updated: 2026/04/06 14:51:12 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,25 @@ int	is_sorted(t_list **stack)
 	return (1);
 }
 
-void	ft_simple_sort(t_list **stack)
+void	ft_simple_sort(t_list **stack_a, t_list **stack_b, int len_a)
 {
-	if ((*stack)->index == 0 && (*stack)->next->index == 2)
+	int	n;
+
+	n = len_a - 3;
+	while (len_a != 3)
 	{
-		ft_sa(stack);
-		ft_ra(stack);
+		if ((*stack_a)->index < n)
+			ft_pb(stack_a, stack_b);
+		else
+			ft_ra(stack_a);
+		len_a = ft_stack_len(stack_a);
 	}
-	else if ((*stack)->index == 2 && (*stack)->next->index == 1)
-	{
-		ft_sa(stack);
-		ft_rra(stack);
-	}
-	else if ((*stack)->index == 1 && (*stack)->next->index == 0)
-		ft_sa(stack);
-	else if ((*stack)->index == 1 && (*stack)->next->index == 2)
-		ft_rra(stack);
-	else if ((*stack)->index == 2 && (*stack)->next->index == 0)
-		ft_ra(stack);
+	if (is_sorted(stack_b))
+		ft_sb(stack_b);
+	ft_sort_three(stack_a);
+	n = ft_stack_len(stack_b);
+	while (n-- > 0)
+		ft_pa(stack_a, stack_b);
 }
 
 static int	radix_bits(int len_a)
@@ -100,8 +101,8 @@ int	push_swap(t_list **stack_a, t_list **stack_b)
 		return (1);
 	else if (len_a == 2)
 		ft_sa(stack_a);
-	else if (len_a == 3)
-		ft_simple_sort(stack_a);
+	else if (len_a <= 5)
+		ft_simple_sort(stack_a, stack_b, len_a);
 	else if (len_a <= 20)
 		radix_sort(stack_a, stack_b, len_a);
 	else if (len_a > 20)

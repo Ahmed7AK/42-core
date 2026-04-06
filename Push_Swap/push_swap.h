@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:11:27 by akheiral          #+#    #+#             */
-/*   Updated: 2026/04/05 11:27:21 by akheiral         ###   ########.fr       */
+/*   Updated: 2026/04/06 14:10:56 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		ft_find_lowest(t_list **stack);
 int		ft_stack_len(t_list **stack);
 void	ft_normalize_index(t_list **stack);
 void	ft_fill_stack(t_list **stack, char **args);
+void	ft_sort_three(t_list **stack);
 
 void	chunk_sort(t_list **stack_a, t_list **stack_b);
 

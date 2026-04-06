@@ -2,6 +2,7 @@
 
 # Configuration
 MAX_MOVES=5500
+MAX_MOVES_5=12
 PUSH_SWAP="./push_swap"
 
 # Colors
@@ -20,7 +21,7 @@ echo "========================================================"
 echo "  PUSH_SWAP TESTER (Ubuntu)"
 echo "  Testing sizes: ${SIZES[*]}"
 echo "  Tests per size: 5 (500 for final 500-number test)"
-echo "  Max moves allowed: $MAX_MOVES"
+echo "  Max moves allowed: $MAX_MOVES (12 for 5 numbers)"
 echo "========================================================"
 
 # ---------------------------------------------------------------------------
@@ -48,7 +49,6 @@ check_sorted() {
     local moves
     moves=$(./push_swap $arg 2>/dev/null)
 
-    # Feed moves into a pure bash stack simulator
     echo "$moves" | awk -v input="$arg" '
     BEGIN {
         n = split(input, arr, " ")
@@ -107,7 +107,6 @@ check_sorted() {
 
 # ---------------------------------------------------------------------------
 # Helper: generate $1 unique random integers in range [$2, $3]
-# Handles negatives correctly by generating range then shifting
 # ---------------------------------------------------------------------------
 rand_unique() {
     local count=$1
@@ -115,7 +114,7 @@ rand_unique() {
     local hi=$3
 
     LC_ALL=C tr -dc '0-9\n' < /dev/urandom 2>/dev/null \
-        | fold -w 9 \
+        | fold -w 9 2>/dev/null \
         | awk -v lo="$lo" -v hi="$hi" -v n="$count" '
             {
                 range = hi - lo + 1
@@ -187,6 +186,61 @@ run_test() {
 # ---------------------------------------------------------------------------
 TOTAL_PASS=0
 TOTAL_FAIL=0
+
+# ---------------------------------------------------------------------------
+# EXHAUSTIVE 5-NUMBER TEST (all 120 permutations, max 12 moves each)
+# ---------------------------------------------------------------------------
+echo ""
+echo -e "${MAGENTA}========================================================"
+echo -e "  EXHAUSTIVE 5-NUMBER TEST (all 120 permutations)"
+echo -e "  Max moves allowed: $MAX_MOVES_5"
+echo -e "========================================================${RESET}"
+
+FIVE_PASS=0
+FIVE_FAIL=0
+FIVE_MAX=0
+FIVE_TOTAL=0
+
+ALL_PERMS=$(awk 'BEGIN {
+    n = 5
+    for (i = 1; i <= n; i++) a[i] = i
+    do {
+        line = ""
+        for (i = 1; i <= n; i++) line = line a[i] (i < n ? " " : "")
+        print line
+        i = n - 1
+        while (i >= 1 && a[i] >= a[i+1]) i--
+        if (i < 1) break
+        j = n
+        while (a[j] <= a[i]) j--
+        tmp = a[i]; a[i] = a[j]; a[j] = tmp
+        left = i + 1; right = n
+        while (left < right) {
+            tmp = a[left]; a[left] = a[right]; a[right] = tmp
+            left++; right--
+        }
+    } while (1)
+}')
+
+while IFS= read -r PERM; do
+    CHECKER_OUT=$(check_sorted "$PERM")
+    MOVES=$(./push_swap $PERM 2>/dev/null | wc -l | tr -d ' ')
+    FIVE_TOTAL=$((FIVE_TOTAL + MOVES))
+    [ "$MOVES" -gt "$FIVE_MAX" ] && FIVE_MAX=$MOVES
+
+    if [ "$CHECKER_OUT" != "OK" ] || [ "$MOVES" -gt "$MAX_MOVES_5" ]; then
+        FIVE_FAIL=$((FIVE_FAIL + 1))
+        [ "$CHECKER_OUT" != "OK" ] && REASON="not_sorted" || REASON="exceeded_moves($MOVES)"
+        echo -e "  ${RED}FAIL${RESET} [$PERM] → $MOVES moves ${YELLOW}↳ $REASON${RESET}"
+    else
+        FIVE_PASS=$((FIVE_PASS + 1))
+    fi
+done <<< "$ALL_PERMS"
+
+FIVE_AVG=$((FIVE_TOTAL / 120))
+TOTAL_PASS=$((TOTAL_PASS + FIVE_PASS))
+TOTAL_FAIL=$((TOTAL_FAIL + FIVE_FAIL))
+echo -e "  ${MAGENTA}5-number: ${GREEN}$FIVE_PASS/120 passed${RESET} / ${RED}$FIVE_FAIL failed${RESET} | max moves: $FIVE_MAX | avg moves: $FIVE_AVG"
 
 # ---------------------------------------------------------------------------
 # WORST CASE SCENARIOS

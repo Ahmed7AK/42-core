@@ -6,7 +6,7 @@
 /*   By: akheiral <akheiral@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:15:42 by akheiral          #+#    #+#             */
-/*   Updated: 2026/04/05 11:27:21 by akheiral         ###   ########.fr       */
+/*   Updated: 2026/04/06 14:21:46 by akheiral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,31 @@ void	ft_fill_stack(t_list **stack, char **args)
 		ft_lstadd_back(stack, tmp);
 		i++;
 	}
+}
+
+void	ft_sort_three(t_list **stack)
+{
+	int	one;
+	int	two;
+	int three;
+
+	one = (*stack)->index;
+	two = (*stack)->next->index;
+	three = (*stack)->next->next->index;
+	if (one > two && two > three && one > three)
+	{
+		ft_sa(stack);
+		ft_rra(stack);
+	}
+	else if (one < two && two > three && one < three)
+	{
+		ft_sa(stack);
+		ft_ra(stack);
+	}
+	else if (one < two && two > three && one > three)
+		ft_rra(stack);
+	else if (one > two && two < three && one > three)
+		ft_ra(stack);
+	else if (one > two && two < three && one < three)
+		ft_sa(stack);
 }
